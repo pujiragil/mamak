@@ -15,7 +15,11 @@ try {
   console.error("Unable to connect to the database : "+ error)
 }
 
-app.use(userRouter)
+// middleware
+app.use(express.json())
+
+// routes
+app.use("/users", userRouter)
 
 app.listen(process.env.PORT, () => {
   console.log("Server running at port " + process.env.PORT)
