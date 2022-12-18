@@ -1,7 +1,8 @@
 import bcrypt from "bcrypt"
 import Users from "../models/UserModel.js";
 
-export const getUsers = async (req, res) => {
+
+export const handleGetUsers = async (req, res) => {
   try {
     const users = await Users.findAll()
     res.status(200).json(users)
@@ -11,7 +12,7 @@ export const getUsers = async (req, res) => {
   }
 }
 
-export const registerUser = async (req, res) => {
+export const handleRegister = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body
   if(!name || !email || !password || !confirmPassword) return res.status(400).json({ message: "Name, email, password and confirm password are required." })
   if(password !== confirmPassword) return res.status(400).json({ message: "Password and confirm password doesn't match."})

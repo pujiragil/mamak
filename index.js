@@ -1,8 +1,8 @@
 import express from "express"
 import db from "./config/Database.js"
-import * as dotenv from "dotenv"
+import dotenv from "dotenv"
 
-import userRouter from "./routes/index.js"
+import userRouter from "./routes/user.js"
 
 dotenv.config()
 
