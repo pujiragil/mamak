@@ -15,11 +15,9 @@ export const handleGetUsers = async (req, res) => {
 export const handleRegister = async (req, res) => {
   const { name, email, password, confirmPassword } = req.body;
   if (!name || !email || !password || !confirmPassword)
-    return res
-      .status(400)
-      .json({
-        message: "Name, email, password and confirm password are required.",
-      });
+    return res.status(400).json({
+      message: "Name, email, password and confirm password are required.",
+    });
   if (password !== confirmPassword)
     return res
       .status(400)
@@ -65,7 +63,13 @@ export const handleLogin = async (req, res) => {
       { expiresIn: "1d" }
     );
     // store refreshToken to usersDB
-    await Users.update({ refresh_token: refreshToken }, { where: { id: user.id }})
+    await Users.update(
+      { refresh_token: refreshToken },
+      { where: { id: user.id } }
+    );
+    res.status(200)
+    res.cookie("mamak", refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
+    res.json({ token: accessToken })
   } catch (err) {
     res.status(404).json({ message: "User not found." });
   }
