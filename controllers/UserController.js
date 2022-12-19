@@ -69,7 +69,7 @@ export const handleLogin = async (req, res) => {
     );
     res.status(200)
     res.cookie("mamak", refreshToken, { httpOnly: true, maxAge: 24 * 60 * 60 * 1000 })
-    res.json({ token: accessToken })
+    res.json({ accessToken: accessToken })
   } catch (err) {
     res.status(404).json({ message: "User not found." });
   }
