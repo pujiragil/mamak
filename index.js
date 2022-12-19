@@ -1,6 +1,7 @@
 import express from "express"
 import db from "./config/Database.js"
 import dotenv from "dotenv"
+import cookieParser from "cookie-parser"
 
 import userRouter from "./routes/user.js"
 
@@ -17,6 +18,7 @@ try {
 
 // middleware
 app.use(express.json())
+app.use(cookieParser())
 
 // routes
 app.use("/users", userRouter)
