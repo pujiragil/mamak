@@ -64,6 +64,8 @@ export const handleLogin = async (req, res) => {
       process.env.REFRESH_TOKEN_SECRET,
       { expiresIn: "1d" }
     );
+    // store refreshToken to usersDB
+    await Users.update({ refresh_token: refreshToken }, { where: { id: user.id }})
   } catch (err) {
     res.status(404).json({ message: "User not found." });
   }
